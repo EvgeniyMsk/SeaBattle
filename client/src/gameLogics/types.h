@@ -1,9 +1,24 @@
 #ifndef TYPES_H
 #define TYPES_H
-
+#include <QPointF>
 #include <QPair>
 #include <QSharedPointer>
+namespace Orientation {
+enum Orient{
+	UP,
+	RIGHT,
+	DOWN,
+	LEFT
+};
+}
 
+
+enum Direction {
+	LEFT,
+	DOWN,
+	RIGHT,
+	HIGH
+};
 
 enum AttackStatus
 {
@@ -49,10 +64,22 @@ enum Players{
 	ENEMY
 };
 
+enum ImageID{
+	ARROW_UP,
+	ARROW_DOWN,
+	ARROW_R,
+	ARROW_L,
+	ARROW_IN_ITSELF,
+	FIRT_POINT
+};
+
 const int FIELD_ROW_NUM = 10;
 const int FIELD_COL_NUM = 10;
+const int DATA_KEY = 15;
 
 const int sizeOfCube = 300;
+const int sizeOfCubeDivTen = 30;
+
 inline QPair<int, int> coordinates(int id)
 {
     return QPair<int, int>(id / FIELD_ROW_NUM, id % FIELD_COL_NUM);
@@ -68,9 +95,15 @@ inline int getIdByCoordinates(int row, int col)
     return row * FIELD_ROW_NUM + col;
 }
 
+inline QPointF getQPointFByID(int id)
+{
+	return QPointF(id % FIELD_COL_NUM * (sizeOfCube / FIELD_ROW_NUM)
+				   , id / FIELD_ROW_NUM * (sizeOfCube / FIELD_ROW_NUM));
+}
+
 inline bool checkCoord(int x, int y)
 {
-    return !((x < 0) || (x >= FIELD_ROW_NUM) || (y < 0) || (y >= FIELD_COL_NUM));
+	return !((x < 0) || (x >= FIELD_ROW_NUM) || (y < 0) || (y >= FIELD_COL_NUM));
 }
 #endif // TYPES_H
 

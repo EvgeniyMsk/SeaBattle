@@ -1,7 +1,4 @@
 #pragma once
-#ifndef PLAYER_H
-#define PLAYER_H
-
 #include <QObject>
 #include <QSharedPointer>
 
@@ -82,6 +79,7 @@ protected:
       * Set the summary fleet health of player by fleet.
       */
     inline void setFleetHealth(const QVector<FleetInstaller::ptrShip>& fleet);
+
     /**
       *
       */
@@ -92,6 +90,7 @@ protected:
     int chooseRandomCell();
 
     QSharedPointer<GameField> myField;
+
     QSharedPointer<GameField> enemyField;
 
     //typedef QSharedPointer<Ship> ptrShip;
@@ -144,14 +143,9 @@ void Player::setFleetHealth(const QVector<FleetInstaller::ptrShip> &fleet)
     {
         fleetHealth += fleet[i]->health();
     }
-    --fleetHealth;
 }
 
 inline void Player::autoInstallFleet(const QSharedPointer<FleetInstaller> &fleetInstaller)
 {
     randomInstallFleet(fleetInstaller);
 }
-
-
-
-#endif // PLAYER_H

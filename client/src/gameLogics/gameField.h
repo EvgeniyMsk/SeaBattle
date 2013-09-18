@@ -54,6 +54,9 @@ protected:
 	QSharedPointer<FieldView> view;
 	GameCell field[FIELD_ROW_NUM][FIELD_COL_NUM];
 	QSharedPointer<TextureAnalyzer> textureAnalyzer;
+	virtual void repaintCell(int row, int column, int partOfShip, int shipSize, bool orientation);
+
+	QVector<int> fleet;// at 0 - count of BOAT_SCOUT at 3 - count of AEROCARRIER
 
 };
 

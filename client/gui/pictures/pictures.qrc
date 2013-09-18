@@ -11,10 +11,10 @@
         <file>smoke.jpg</file>
         <file>splash.jpg</file>
         <file>wreck.jpg</file>
-        <file>aerocarrier.jpg</file>
-        <file>cruiser.jpg</file>
-        <file>destroyer.jpg</file>
-        <file>boat scout.jpg</file>
+        <file>aerocarrier.png</file>
+        <file>cruiser.png</file>
+        <file>destroyer.png</file>
+        <file>boat scout.png</file>
         <file>bottom_hor.jpg</file>
         <file>head_hor.jpg</file>
         <file>middle part_hor.jpg</file>
@@ -27,5 +27,8 @@
         <file>KILLED.png</file>
         <file>WINNER.jpeg</file>
         <file>LOSER.jpeg</file>
+        <file>arrow.png</file>
+        <file>cirle arrow.png</file>
+        <file>first point.png</file>
     </qresource>
 </RCC>

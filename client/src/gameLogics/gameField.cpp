@@ -3,6 +3,7 @@
 GameField::GameField(const QSharedPointer<FieldView> &fieldView):
 	view(fieldView), textureAnalyzer(new TextureAnalyzer)
 {
+	fleet << 4 << 3 << 2 << 1; //conut of ship
 }
 
 void GameField::setShip(int id, bool orientation, QSharedPointer<Ship> ship)
@@ -18,7 +19,7 @@ void GameField::setShip(int id, bool orientation, QSharedPointer<Ship> ship)
         {
             field[row][col + i].setShip(ship);
 			ship.data()->appedIdOfPart(getIdByCoordinates(row, col + i));
-			view->repaint(getIdByCoordinates(row, col + i), textureAnalyzer->shipTexture(i + 1, shipSize, orientation));
+			repaintCell(row, col + i, i + 1, shipSize, orientation);
         }
     }
     // otherwise - vertical orientation
@@ -28,9 +29,10 @@ void GameField::setShip(int id, bool orientation, QSharedPointer<Ship> ship)
         {
             field[row + i][col].setShip(ship);
 			ship.data()->appedIdOfPart(getIdByCoordinates(row + i, col));
-			view->repaint(getIdByCoordinates(row + i, col), textureAnalyzer->shipTexture(i + 1, shipSize, orientation));
+			repaintCell(row + i, col, i + 1, shipSize, orientation);
         }
     }
+	fleet[shipSize - 1] = fleet.at(shipSize - 1) - 1;
 }
 
 QSharedPointer<Ship> GameField::getShip(int id)
@@ -49,15 +51,14 @@ void GameField::removeShip(int id)
 	QPair<int, int> coordinateOfShip = coordinates(id);
 	QSharedPointer<Ship> ship = field[coordinateOfShip.first][coordinateOfShip.second].getShip();
 	int size = ship->size();
-	view->repaint(id, EMPTY);
-	if (size != 1){
-		QVector<int> vectorOfId = ship->getCoordinate();
-		for(int i = 1; i <= size; i++){
-			QPair<int, int> coordinateOfShip = coordinates(vectorOfId.at(i - 1));
-			field[coordinateOfShip.first][coordinateOfShip.second].removeShip();
-			view->repaint(vectorOfId.at(i - 1), EMPTY);
-		}
+	QVector<int> vectorOfId = ship->getCoordinate();
+	ship->clearCoordinate();
+	for(int i = 1; i <= size; i++){
+		QPair<int, int> coordinateOfShip = coordinates(vectorOfId.at(i - 1));
+		field[coordinateOfShip.first][coordinateOfShip.second].removeShip();
+		view->repaint(vectorOfId.at(i - 1), EMPTY);
 	}
+	fleet[size - 1] = fleet.at(size - 1) + 1;
 }
 
 AttackStatus GameField::attack(int id)
@@ -87,12 +88,18 @@ AttackStatus GameField::attack(int id)
 			for (int i = idFirst % FIELD_COL_NUM - 1; i <= idFirst % FIELD_COL_NUM + 1; i++){
 				for (int j = idFirst / FIELD_ROW_NUM - 1; j <= idSecond / FIELD_ROW_NUM + 1; j++){
 					markKilled(j, i);
+					if(!field[j][i].attackable()){
+						field[j][i].attack();
+					}
 				}
 			}
 		} else{
 			for (int i = idFirst % FIELD_COL_NUM - 1; i <= idSecond % FIELD_COL_NUM + 1; i++){
 				for (int j = idFirst / FIELD_ROW_NUM - 1; j <= idFirst / FIELD_ROW_NUM + 1; j++){
 					markKilled(j, i);
+					if(!field[j][i].attackable()){
+						field[j][i].attack();
+					}
 				}
 			}
 		}
@@ -124,6 +131,15 @@ void GameField::markKilled(int i, int j)
 			}
 		}
 	}
+}
+
+void GameField::repaintCell(int row, int column, int partOfShip, int shipSize, bool orientation)
+{
+	Q_UNUSED(row);
+	Q_UNUSED(column);
+	Q_UNUSED(partOfShip);
+	Q_UNUSED(shipSize);
+	Q_UNUSED(orientation);
 }
 
 int GameField::position(QVector<int> vector, int id)

@@ -17,7 +17,7 @@ public:
 	explicit HumanPlayer(const QSharedPointer<GameField> &plrField,
 						 const QSharedPointer<GameField>& enmField,
 						 const QSharedPointer<FieldView>& _plrFieldView,
-						 const QSharedPointer<FieldView>& _enmFieldView,
+						 const QSharedPointer<FieldView>& _enmFieldView, const QSharedPointer<InfoTabView> &infoTab,
 						 QObject *parent = 0);
     
     // for test purpose
@@ -42,12 +42,14 @@ private slots:
       * Reemit fleetInstalled signal with this parametr.
       */
     void reEmitFleetInstalled();
+	void needAutoInstallFleet();
     //void deleteShip(int id);
 private:
     QSharedPointer<FieldView> plrFieldView;
     QSharedPointer<FieldView> enmFieldView;
     QSharedPointer<FleetInstaller> fleetInst;
-    bool myTurn;
+	QSharedPointer<InfoTabView> infoTab;
+	bool myTurn;
 };
 
 #endif // HUMANPLAYER_H

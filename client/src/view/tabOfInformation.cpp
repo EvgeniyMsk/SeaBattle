@@ -6,19 +6,19 @@ TabOfInformation::TabOfInformation(QWidget *parent) :
 	ui(new Ui::TabOfInformation)
 {
 	ui->setupUi(this);
-    QString text = QString::fromLocal8Bit ("ÇÄÐÀÂÑÒÂÓÉ, ÓÂÀÆÀÅÌÛÉ ÈÃÐÎÊ!\nÓñòàíîâè ôëîò è â áîé!\n");
-    text += QString::fromLocal8Bit("Ïîäñêàçêà: äëÿ óñòàíîâêè êîðàáëÿ ËÊÌ íàæìèòå íà íóæíîé êëåòêå ");
-    text += QString::fromLocal8Bit("è îòïóñòèòå íà òîé æå èëè íà äðóãîé êëåòêå, ãäå äîëæåí çàêîí÷èòñÿ êîðàáëü");
-    text += QString::fromLocal8Bit("\nÄëÿ óäàëåíèÿ êîðàáëÿ íàæìèòå ÏÊÌ íà ëþáîé êëåòêå, èç òåõ, ÷òî îí çàíèìàåò.");
+	QString text = QString::fromLocal8Bit ("Ð—Ð”Ð ÐÐ’Ð¡Ð¢Ð’Ð£Ð™, Ð£Ð’ÐÐ–ÐÐ•ÐœÐ«Ð™ Ð˜Ð“Ð ÐžÐš!\nÐ£ÑÑ‚Ð°Ð½Ð¾Ð²Ð¸ Ñ„Ð»Ð¾Ñ‚ Ð¸ Ð² Ð±Ð¾Ð¹!\n");
+	text += QString::fromLocal8Bit("ÐŸÐ¾Ð´ÑÐºÐ°Ð·ÐºÐ°: Ð´Ð»Ñ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²ÐºÐ¸ ÐºÐ¾Ñ€Ð°Ð±Ð»Ñ Ð›ÐšÐœ Ð½Ð°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð½Ð° Ð½ÑƒÐ¶Ð½Ð¾Ð¹ ÐºÐ»ÐµÑ‚ÐºÐµ ");
+	text += QString::fromLocal8Bit("Ð¸ Ð¾Ñ‚Ð¿ÑƒÑÑ‚Ð¸Ñ‚Ðµ Ð½Ð° Ñ‚Ð¾Ð¹ Ð¶Ðµ Ð¸Ð»Ð¸ Ð½Ð° Ð´Ñ€ÑƒÐ³Ð¾Ð¹ ÐºÐ»ÐµÑ‚ÐºÐµ, Ð³Ð´Ðµ Ð´Ð¾Ð»Ð¶ÐµÐ½ Ð·Ð°ÐºÐ¾Ð½Ñ‡Ð¸Ñ‚ÑÑ ÐºÐ¾Ñ€Ð°Ð±Ð»ÑŒ");
+	text += QString::fromLocal8Bit("\nÐ”Ð»Ñ ÑƒÐ´Ð°Ð»ÐµÐ½Ð¸Ñ ÐºÐ¾Ñ€Ð°Ð±Ð»Ñ Ð½Ð°Ð¶Ð¼Ð¸Ñ‚Ðµ ÐŸÐšÐœ Ð½Ð° Ð»ÑŽÐ±Ð¾Ð¹ ÐºÐ»ÐµÑ‚ÐºÐµ, Ð¸Ð· Ñ‚ÐµÑ…, Ñ‡Ñ‚Ð¾ Ð¾Ð½ Ð·Ð°Ð½Ð¸Ð¼Ð°ÐµÑ‚.");
 	ui->textBrowser->setText(text);
 	this->setMaximumSize(sizeOfCube + 40, sizeOfCube + 40);
 	this->setMinimumSize(sizeOfCube + 40, sizeOfCube + 40);
 	connect(ui->toolButton, SIGNAL(clicked()), this, SLOT(pushButtonReadyToFight()));
 	connect(ui->toolButton_2, SIGNAL(clicked()), this, SIGNAL(needAutoSetting()));
-	ui->label->setPixmap(QPixmap(":/pictures/aerocarrier.jpg"));
-	ui->label_2->setPixmap(QPixmap(":/pictures/cruiser.jpg"));
-	ui->label_3->setPixmap(QPixmap(":/pictures/destroyer.jpg"));
-	ui->label_4->setPixmap(QPixmap(":/pictures/boat scout.jpg"));
+	ui->label->setPixmap(QPixmap(":/pictures/aerocarrier.png"));
+	ui->label_2->setPixmap(QPixmap(":/pictures/cruiser.png"));
+	ui->label_3->setPixmap(QPixmap(":/pictures/destroyer.png"));
+	ui->label_4->setPixmap(QPixmap(":/pictures/boat scout.png"));
 }
 
 TabOfInformation::~TabOfInformation()
