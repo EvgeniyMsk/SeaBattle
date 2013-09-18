@@ -1,6 +1,7 @@
 #pragma once
 #include <QGraphicsItem>
 #include <QPainter>
+#include <QPointF>
 #include "types.h"
 
 class Cell: public QObject, public QGraphicsItem
@@ -14,11 +15,14 @@ public:
 	void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
 	void mousePressEvent(QGraphicsSceneMouseEvent *event);
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
-    void changeStatusOfCell(Textures texture = EMPTY);
+	void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+	void changeStatusOfCell(Textures texture = EMPTY);
 signals:
 	void attacked(int id);
 	void getCoordinate(QPointF first, QPointF second);
 	void deleteShip(int id);
+	void coordinatesOfMouseNow(int id);
+	void setArrows(int id);
 private:
 	int x;
 	int y;

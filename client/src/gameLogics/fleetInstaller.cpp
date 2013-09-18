@@ -4,7 +4,7 @@ FleetInstaller::FleetInstaller(QVector<ptrShip> playerFleet,
                                const QSharedPointer<GameField> &playerField,
                                const QSharedPointer<InfoTabView> &_fleetInfoTab):
     fleet(playerFleet),
-    field(playerField),
+	field(playerField),
     fleetInfoTab(_fleetInfoTab)
 {
     qRegisterMetaType<PlacementStatus>("PlacementStatus");
@@ -17,7 +17,16 @@ FleetInstaller::FleetInstaller(QVector<ptrShip> playerFleet,
 
 QVector<FleetInstaller::ptrShip> FleetInstaller::getFleet() const
 {
-    return fleet;
+	return fleet;
+}
+
+void FleetInstaller::clear()
+{
+	if (existingFleet.size() != 0){
+		while(existingFleet.size() != 0){
+			deleteShip(existingFleet.first()->getCoordinate().first());
+		}
+	}
 }
 
 FleetInstaller::Orientation FleetInstaller::orientation(CellPair cells)
@@ -67,7 +76,17 @@ FleetInstaller::ptrShip FleetInstaller::pickShip(FleetInstaller::CellPair cells,
             return ship;
         }
     }
-    return QSharedPointer<Ship>();
+	return QSharedPointer<Ship>();
+}
+
+int FleetInstaller::positionOfShip(QVector<QSharedPointer<Ship> > vector, const QSharedPointer<Ship> ship)
+{
+	for (int i = 0; i < vector.size(); i++){
+		if (vector.at(i) == ship){
+			return i;
+		}
+	}
+	return vector.size();
 }
 
 FleetInstaller::PlacementStatus FleetInstaller::shipPlaced(int firstId, int secondId)
@@ -170,6 +189,7 @@ FleetInstaller::PlacementStatus FleetInstaller::shipPlaced(int firstId, int seco
         fleetInfoTab->changeCounter(shipType, -1);
     }
     field->setShip(point1.first * FIELD_ROW_NUM + point1.second, orn, ship);
+	existingFleet.append(ship);
     emit placementResult(OK);
 	return OK;
 }
@@ -181,8 +201,12 @@ void FleetInstaller::deleteShip(int id)
         NameOfShips shipType = NameOfShips(field->getShip(id)->size() - 1);
         fleetInfoTab->changeCounter(shipType, 1);
         fleet.append(field->getShip(id));
+		if (existingFleet.size() != 0){
+			existingFleet.remove(positionOfShip(existingFleet, field->getShip(id)));
+		}
         field->removeShip(id);
     }
+
 }
 
 bool FleetInstaller::checkIsFleetReady()
@@ -194,6 +218,3 @@ bool FleetInstaller::checkIsFleetReady()
     }
     return false;
 }
-
-
-

@@ -9,13 +9,6 @@
 #include "player.h"
 
 
-enum Direction {     //paste it to types.h
-    LEFT,
-    DOWN,
-    RIGHT,
-    HIGH
-};
-
 /**
   * Abstract class for two types of AIplayer - smart and simple.
   */
@@ -40,8 +33,9 @@ protected:
     //bool successShot;
     bool isWounded;
     int lastAttackedCell;
-
     static const int delay;
+    int cnt;
+
 public slots:
 
     virtual void turn() = 0;

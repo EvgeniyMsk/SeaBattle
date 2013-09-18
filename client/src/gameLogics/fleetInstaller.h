@@ -40,6 +40,11 @@ public:
                    const QSharedPointer<InfoTabView>& _fleetInfoTab);
 
     QVector<ptrShip> getFleet() const;
+	/**
+	  * This method delete all ship on field.
+	  */
+	void clear();
+
 signals:
     /**
       * Signal emitted after shipPlaced() slot ended work.
@@ -85,10 +90,13 @@ private:
       * If there isn't suited ship in fleet, it returns null pointer.
       */
     ptrShip pickShip(CellPair cells, Orientation orn);
+	int positionOfShip(QVector<QSharedPointer<Ship> > vector, const QSharedPointer<Ship> ship);
 
     QVector<ptrShip> fleet;
     QSharedPointer<GameField> field;
     QSharedPointer<InfoTabView> fleetInfoTab;
+	QVector<QSharedPointer<Ship> > existingFleet;
+
 };
 
 Q_DECLARE_METATYPE(FleetInstaller::PlacementStatus);

@@ -2,11 +2,11 @@
 #include <QDebug>
 View::View()
 {
-	mMainWindow = QSharedPointer<MainWindow>(new MainWindow);
+	mBattleWidget = QSharedPointer<BattleWidget>(new BattleWidget);
 	mPlayerField = QSharedPointer<FieldView>(new FieldView);
 	mEnemyField = QSharedPointer<FieldView>(new FieldView);
 	mInfoTab = QSharedPointer<InfoTabView>(new InfoTabView);
-	mMainWindow.data()->show();
+	mBattleWidget.data()->show();
 }
 
 View::~View()
@@ -15,22 +15,27 @@ View::~View()
 
 void View::showPlayerField()
 {
-    mMainWindow->showPlayerField(mPlayerField->getField());
+	mBattleWidget->showPlayerField(mPlayerField->getField());
 }
 
 void View::showEnemyField()
 {
-    mMainWindow->showEnemyField(mEnemyField->getField());
+	mBattleWidget->showEnemyField(mEnemyField->getField());
 }
 
 void View::showInfoTab()
 {
-	mMainWindow->showInfoTab(mInfoTab->getInfoTab());
+	mBattleWidget->showInfoTab(mInfoTab->getInfoTab());
 }
 
 void View::setTime(int time)
 {
-	mMainWindow->setTime(time);
+	mBattleWidget->setTime(time);
+}
+
+void View::hideTimer()
+{
+	mBattleWidget->hideTimer();
 }
 
 QSharedPointer<FieldView> View::getPlayerFieldView()
@@ -50,6 +55,6 @@ QSharedPointer<InfoTabView> View::getInfoTabView()
 
 void View::setMessage(QString text)
 {
-	mMainWindow->setMessage(text);
+	mBattleWidget->setMessage(text);
 }
 

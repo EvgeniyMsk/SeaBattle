@@ -6,6 +6,8 @@ FieldView::FieldView()
 	connect(mField.data(), SIGNAL(shipOnCells(int,int)), this, SIGNAL(placeShip(int,int)));
 	connect(mField.data(), SIGNAL(playerAttackCell(int)), this, SIGNAL(attack(int)));
 	connect(mField.data(), SIGNAL(deleteShip(int)), this, SIGNAL(deleteShip(int)));
+	connect(mField.data(), SIGNAL(setFirstArrows(int)), this, SIGNAL(setFirstArrows(int)));
+	connect(mField.data(), SIGNAL(setNextArrow(int)), this, SIGNAL(setNextArrow(int)));
 }
 
 QSharedPointer<Field> FieldView::getField()
@@ -21,6 +23,16 @@ void FieldView::showAttackStatus(AttackStatus status)
 void FieldView::showResult(Players player)
 {
 	mField->showResult(player);
+}
+
+void FieldView::addImage(int id, ImageID iD)
+{
+	mField->addImage(id, iD);
+}
+
+void FieldView::removeImageFromCell(int id)
+{
+	mField->removeImageFromCell(id);
 }
 
 void FieldView::setEnabled(bool enabled)

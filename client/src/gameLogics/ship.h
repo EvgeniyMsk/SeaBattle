@@ -13,6 +13,7 @@ class Ship : public QObject
 public:
 	void appedIdOfPart(int id);
 	QVector<int> getCoordinate();
+	void clearCoordinate();
     virtual ~Ship() {}
     virtual int damage() = 0;
     virtual int health() const = 0;

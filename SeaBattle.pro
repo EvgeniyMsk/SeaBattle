@@ -7,7 +7,7 @@
 QT       += core gui
 QT       += widgets
 
-DEFINES += QT4
+DEFINES += QT5
 
 TARGET = SeaBattle
 TEMPLATE = app
@@ -15,7 +15,6 @@ TEMPLATE = app
 
 
 SOURCES += client/src/main.cpp\
-    client/src/view/mainwindow.cpp \
     client/src/gameLogics/enemyCell.cpp \
     client/src/gameLogics/playerCell.cpp \
     client/src/gameLogics/playerField.cpp \
@@ -34,9 +33,10 @@ SOURCES += client/src/main.cpp\
     client/src/gameLogics/ship.cpp \
     client/src/gameLogics/aiPlayerSimple.cpp \
     client/src/gameLogics/textureAnalyzer.cpp \
-    client/src/gameLogics/player.cpp
+    client/src/gameLogics/player.cpp \
+    client/src/view/BattleWidget.cpp
 
-HEADERS  += client/src/view/mainwindow.h \
+HEADERS  += \
     client/src/gameLogics/enemyCell.h \
     client/src/gameLogics/types.h \
     client/src/gameLogics/playerCell.h \
@@ -58,11 +58,12 @@ HEADERS  += client/src/view/mainwindow.h \
     client/src/view/fieldView.h \
     client/src/view/infoTabView.h \
     client/src/gameLogics/aiPlayerSimple.h \
-    client/src/gameLogics/textureAnalyzer.h
+    client/src/gameLogics/textureAnalyzer.h \
+    client/src/view/BattleWidget.h
 
 FORMS    += client/gui/tabOfInformation.ui \
-    client/gui/mainwindow.ui \
-    client/gui/field.ui
+    client/gui/field.ui \
+    client/src/view/BattleWidget.ui
 
 RESOURCES += client/gui/pictures/pictures.qrc
 
